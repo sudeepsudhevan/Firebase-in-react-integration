@@ -10,12 +10,14 @@ function App() {
     <div className="App">
       <h1>Test</h1>
       <button onClick={() => {
+    //display in console the products in firestore database 
         getDocs(collection(db, 'products')).then(snapshot => {
           snapshot.docs.forEach((obj) => {
             console.log(obj.data(),obj.id);
           })  
         })
       }}>click me</button>
+//add data to firestore database
       <button onClick={() => {
         addDoc(collection(db, 'products'), {
           name: 'iphone 13',
@@ -23,11 +25,13 @@ function App() {
           type:'mobile'
         })
       }}>add</button>
+//delete product using id
       <button onClick={() => {
         deleteDoc(doc(db, 'products', 'xvLlUatJjSsQE4V11kSm')).then(() => {
           console.log('deleted');
         })
       }}>delete</button>
+//upadte product using id
       <button onClick={() => {
         updateDoc(doc(db, 'products', 'qgns6CuicNz20xeudMIb'), {
           name: 'iphone 14',
@@ -35,10 +39,11 @@ function App() {
           type:'mobile'
         })
       }}>update</button>
+//signup function
       <button onClick={() => {
         const auth = getAuth();
         createUserWithEmailAndPassword(auth,'sudeep1@gmail.com', '123456').then((userCredential) => {
-        // Signed in 
+        // Signed up 
           
           var user = userCredential.user;
           getDocs(collection(db, 'products')).then(snapshot => {
